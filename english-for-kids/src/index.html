@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>RsLang</title>
 </head>
 <body>
    <div class="wrapper">
-    <div class="container-fluid fixed-top bg-dark py-3">
+    <div class="container-fluid fixed-top py-3">
         <div class="row collapse show no-gutters d-flex h-100 position-relative">
             <div class="col-3 px-0 w-sidebar navbar-collapse collapse d-none d-md-flex">
                 <!-- spacer col -->
@@ -34,57 +39,57 @@
         <div class="row vh-100 collapse show no-gutters d-flex h-100 position-relative">
             <div class="col-3 p-0 vh-100 h-100 text-white w-sidebar navbar-collapse collapse d-none d-md-flex sidebar">
                 <!-- fixed sidebar -->
-                <div class="navbar-dark bg-dark position-fixed h-100 w-sidebar">
-                    <h6 class="px-3 pt-3">Menu</h6>
+                <div class="navbar-dark  position-fixed h-100 w-sidebar">
                     <ul class="nav flex-column flex-nowrap text-truncate">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Action (set A)</a>
+                            <a class="nav-link active menu" href="#">Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Action (set B)</a>
+                            <a class="nav-link" href="#/cards">Action (set A)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Action (set C)</a>
+                            <a class="nav-link" href="#/cards">Action (set B)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Action (set C)</a>
+                            <a class="nav-link" href="#/cards">Action (set C)</a>
+                        </li>    
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/cards">Adjective</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Adjective</a>
+                            <a class="nav-link" href="#/cards">Animal (set A)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Animal</a>
+                            <a class="nav-link" href="#/cards">Animal (set B)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Animal (set B)</a>
+                            <a class="nav-link" href="#/cards">Clothes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Clothes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Emotion</a>
+                            <a class="nav-link" href="#/cards">Emotions</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col p-3">
+            <div class="col p-3 pageContainer page-active" id="pageContainer">
+                                    
                 <div class="card-deck">
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/dance.jpg" />
+                                <img src="../images/dance.jpg" class="rounded-circle img-thumbnail" />
                             </div>
                             <div class="card-inner">
                                 <h2>Action (set A)</h2>
                             </div>
-                            <a href="#" class="stretched-link"></a>
+                            <a href="#" class="stretched-link" ></a>
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/swim.jpg" />
+                                <img src="../images/swim.jpg" class="rounded-circle img-thumbnail" />
                             </div>
                             <div class="card-inner">
                                 <h2>Action (set B)</h2>
@@ -93,10 +98,10 @@
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/ride.jpg" />
+                                <img src="../images/ride.jpg" class="rounded-circle img-thumbnail"  />
                             </div>
                             <div class="card-inner">
                                 <h2>Action (set C)</h2>
@@ -105,10 +110,10 @@
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/hug.jpg" />
+                                <img src="../images/hug.jpg" class="rounded-circle img-thumbnail"  />
                             </div>
                             <div class="card-inner">
                                 <h2>Adjective</h2>
@@ -117,22 +122,22 @@
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/cat.jpg" />
+                                <img src="../images/cat.jpg" class="rounded-circle img-thumbnail"  />
                             </div>
                             <div class="card-inner">
-                                <h2>Animal</h2>
+                                <h2>Animal (set A)</h2>
                             </div>
                             <a href="#" class="stretched-link"></a>
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/bird.jpg" />
+                                <img src="../images/bird.jpg" class="rounded-circle img-thumbnail"  />
                             </div>
                             <div class="card-inner">
                                 <h2>Animal (set B)</h2>
@@ -141,10 +146,10 @@
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/blouse.jpg" />
+                                <img src="../images/blouse.jpg" class="rounded-circle img-thumbnail" />
                             </div>
                             <div class="card-inner">
                                 <h2>Clothes</h2>
@@ -153,34 +158,159 @@
                         </div>
                     </div>
     
-                    <div>
+                    <div class="p-4">
                         <div class="card">
                             <div class="image">
-                                <img src="../images/smile.jpg" />
+                                <img src="../images/smile.jpg" class="rounded-circle img-thumbnail" />
                             </div>
                             <div class="card-inner">
-                                <h2>Emotion</h2>
+                                <h2>Emotions</h2>
                             </div>
                             <a href="#" class="stretched-link"></a>
                         </div>
                     </div> 
                 </div>
             </div>
+
+            
+                <div class="col p-3 category" id="category">               
+                    <div class="card-deck">
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/cry.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                    <h2>cry</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link" ></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/dance.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>dance</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/dive.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>dive</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/draw.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>draw</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/fish.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>fish</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/fly.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>fly</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/hug.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>hug</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+        
+                        <div class="p-4">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="../images/jump.jpg"/>
+                                </div>
+                                <div class=" d-flex justify-content-end px-2">
+                                    <div class="card-inner">
+                                        <h2>jump</h2>
+                                    </div>
+                                    <div class="icon fa-2x color-light"><i class="fas fa-redo"></i></div>
+                                </div>
+                                <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            
         </div>
     </div>
 
-
-<!--             
-            <div class="page" id="main">
-
-            </div>
-            <div class="page" id="category">
-
-            </div> -->
+         
+            
   
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
