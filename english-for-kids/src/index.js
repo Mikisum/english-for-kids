@@ -324,8 +324,24 @@ MENU.addEventListener('click', (event) => {
     }
     let getNameCategory = event.target.innerText;
     updateCards(getNameCategory);
-    
+});
 
+const pageLinks = container.querySelectorAll('a');
+
+container.addEventListener('click', (event) => {
+    if (event.target.classList.contains('stretched-link')) {
+      let selectedLink = event.target.innerText;
+      navLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.innerText === selectedLink) {
+          a.classList.add('active');
+        }
+      })
+      container.style.display = 'none';
+      categoryPage.style.display = 'block';
+      updateCards(selectedLink);
+    }
+    
 });
 
 function updateCards(categoryName) {
