@@ -302,12 +302,13 @@ const cards = {
     ],
   } 
 
-console.log(cards);
 const container = document.getElementById('pageContainer');
 const categoryPage = document.getElementById('category');
 
 const MENU = document.querySelector('.nav'); 
 const navLinks = document.querySelectorAll('.nav-link');
+const menuIcon = document.querySelector('.menu');
+
 
 MENU.addEventListener('click', (event) => {
     navLinks.forEach(a => {
@@ -325,6 +326,23 @@ MENU.addEventListener('click', (event) => {
     let getNameCategory = event.target.innerText;
     updateCards(getNameCategory);
 });
+//flipping a card when clicking on the icon
+const card = categoryPage.querySelectorAll('card');
+
+categoryPage.addEventListener('click', (event) => {
+  if (event.target.classList.contains('fas')) {
+    event.target.closest('.card').classList.add("flipped");
+  }
+});
+//flip back a card on mouseout
+categoryPage.addEventListener('mouseout', (event) => {
+  let card = event.target.closest('.card');
+  let cardRelatedTarget = event.relatedTarget.closest('.card');
+  if (card !== null && card != cardRelatedTarget)
+  {
+    card.classList.remove("flipped");
+  } 
+}); 
 
 const pageLinks = container.querySelectorAll('a');
 
@@ -348,6 +366,7 @@ function updateCards(categoryName) {
     const htmlCards = categoryPage.getElementsByClassName('card');
     for (let i = 0; i < htmlCards.length; i++) {
         htmlCards[i].getElementsByTagName('img')[0].src = '../' + cards[categoryName][i].image;
+        htmlCards[i].getElementsByTagName('h2')[0].innerText = cards[categoryName][i].word;
     }
 }
 
