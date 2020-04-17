@@ -327,11 +327,12 @@ MENU.addEventListener('click', (event) => {
     updateCards(getNameCategory);
 });
 //flipping a card when clicking on the icon
-const card = categoryPage.querySelectorAll('card');
-
 categoryPage.addEventListener('click', (event) => {
   if (event.target.classList.contains('fas')) {
     event.target.closest('.card').classList.add("flipped");
+  }
+  else if (event.target.classList.contains('stretched-link')) {
+    event.target.firstElementChild.play();
   }
 });
 //flip back a card on mouseout
@@ -343,9 +344,7 @@ categoryPage.addEventListener('mouseout', (event) => {
     card.classList.remove("flipped");
   } 
 }); 
-
-const pageLinks = container.querySelectorAll('a');
-
+//transition to categories
 container.addEventListener('click', (event) => {
     if (event.target.classList.contains('stretched-link')) {
       let selectedLink = event.target.innerText;
@@ -359,14 +358,18 @@ container.addEventListener('click', (event) => {
       categoryPage.style.display = 'block';
       updateCards(selectedLink);
     }
-    
 });
 
+const htmlCards = categoryPage.getElementsByClassName('card');
 function updateCards(categoryName) {
-    const htmlCards = categoryPage.getElementsByClassName('card');
+    
     for (let i = 0; i < htmlCards.length; i++) {
-        htmlCards[i].getElementsByTagName('img')[0].src = '../' + cards[categoryName][i].image;
+        htmlCards[i].getElementsByTagName('img').forEach(element => {
+          element.src = '../' + cards[categoryName][i].image;
+        });
         htmlCards[i].getElementsByTagName('h2')[0].innerText = cards[categoryName][i].word;
+        htmlCards[i].getElementsByClassName('translation')[0].innerText = cards[categoryName][i].translation;
+        htmlCards[i].getElementsByTagName('audio')[0].src = '../' + cards[categoryName][i].audioSrc;
     }
 }
 
