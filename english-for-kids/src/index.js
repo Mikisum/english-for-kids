@@ -326,15 +326,63 @@ MENU.addEventListener('click', (event) => {
     let getNameCategory = event.target.innerText;
     updateCards(getNameCategory);
 });
+
+// change Play/Train mode
+let gameMode;
+let switcher = document.querySelector('.tgl');
+switcher.addEventListener('change', (event) => {
+  gameMode = event.target.checked;
+  game();
+});
+
+function changeButton() {
+  button.classList.remove('btn-lg');
+  button.classList.add('btn-rounded');
+  button.setAttribute('id', 'repeat');
+  button.innerText = "";
+  icon.setAttribute('id', 'repeat');
+  button.append(icon);
+}
+
+let mainCads = container.querySelectorAll('.card');
+function game() {
+  if (gameMode = true) {
+    mainCads.forEach(element => {
+      element.classList.toggle('page-game');
+      button.classList.add('btn-active');
+    });
+  }
+}
+
 //flipping a card when clicking on the icon
+let icon = categoryPage.getElementsByClassName('fas')[0];
+let pageCards = categoryPage.getElementsByClassName('card');
+
+
 categoryPage.addEventListener('click', (event) => {
-  if (event.target.classList.contains('fas')) {
+  if (event.target.getAttribute('id') === 'flip') {
     event.target.closest('.card').classList.add("flipped");
   }
-  else if (event.target.classList.contains('stretched-link')) {
+  else if (event.target.classList.contains('stretched-link') && gameMode !== true) {
     event.target.firstElementChild.play();
   }
+  else if (event.target.getAttribute('id') === 'repeat') {
+    currentCard.getElementsByTagName('audio')[0].play();
+  }
+  else if (event.target.classList.contains('btn')) {
+    changeButton();
+    playAudio();
+  }
 });
+
+let button = document.querySelector('.btn');
+let currentCard;
+
+function playAudio () {
+  let x = Math.floor(Math.random() * pageCards.length);
+  pageCards[x].getElementsByTagName('audio')[0].play();
+  currentCard = pageCards[x];
+}
 //flip back a card on mouseout
 categoryPage.addEventListener('mouseout', (event) => {
   let card = event.target.closest('.card');
@@ -344,6 +392,7 @@ categoryPage.addEventListener('mouseout', (event) => {
     card.classList.remove("flipped");
   } 
 }); 
+
 //transition to categories
 container.addEventListener('click', (event) => {
     if (event.target.classList.contains('stretched-link')) {
@@ -362,7 +411,6 @@ container.addEventListener('click', (event) => {
 
 const htmlCards = categoryPage.getElementsByClassName('card');
 function updateCards(categoryName) {
-    
     for (let i = 0; i < htmlCards.length; i++) {
         htmlCards[i].getElementsByTagName('img').forEach(element => {
           element.src = '../' + cards[categoryName][i].image;
@@ -371,7 +419,19 @@ function updateCards(categoryName) {
         htmlCards[i].getElementsByClassName('translation')[0].innerText = cards[categoryName][i].translation;
         htmlCards[i].getElementsByTagName('audio')[0].src = '../' + cards[categoryName][i].audioSrc;
     }
-}
+};
+
+const SWITCHER = document.getElementById('display-address');
+
+SWITCHER.addEventListener('click', (event) => {
+  htmlCards.forEach(element => {
+    element.getElementsByTagName('div')[2].classList.toggle('none');
+    element.getElementsByTagName('img')[0].classList.toggle('card-cover');
+  })
+});
+
+
+
 
 
 
