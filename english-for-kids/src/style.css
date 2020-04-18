@@ -99,6 +99,10 @@
 .page-active {
   display:block;
 }
+.page-game {
+  background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
+}
+
 
 .category {
   display: none;
@@ -109,12 +113,24 @@
   width: -webkit-fill-available;
 }
 
+.card-cover {
+  height: -webkit-fill-available !important;
+
+
+}
+
 .category .icon  {
   padding-left: 35%;
 }
 
 .fa-redo {
   color: grey;
+}
+
+.fa-lg {
+  font-size: 3em;
+  line-height: 0.75em;
+  vertical-align: 0;
 }
 
  .category .stretched-link {
@@ -195,6 +211,9 @@ transition: margin-left .15s linear;
   }
   
 }
+.nav {
+    font-size: x-large;
+}
 
 .bg-dark, .navbar-dark {
   background: linear-gradient(40deg,#00bf82,#0099ae);
@@ -250,8 +269,8 @@ a:hover {
 .tgl + .tgl-btn {
   outline: 0;
   display: block;
-  width: 4em;
-  height: 2em;
+  width: 6em;
+  height: 3em;
   position: relative;
   cursor: pointer;
   -webkit-user-select: none;
@@ -268,12 +287,16 @@ a:hover {
 }
 .tgl + .tgl-btn:after {
   left: 0;
+  
 }
 .tgl + .tgl-btn:before {
   display: none;
+  
 }
 .tgl:checked + .tgl-btn:after {
   left: 50%;
+  
+  text-align: left;
 }
 
 .tgl-light + .tgl-btn {
@@ -289,7 +312,30 @@ a:hover {
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
 }
-.tgl-light:checked + .tgl-btn {
+.tgl-light:checked + .tgl-btn{
   background: #fb3;
+}
+
+.none {
+  opacity:0;
+  width: 0;
+  height: 0;
+  font-size: 0;
+}
+.btn {
+  display: none;
+  position: relative;
+  left: 50%;
+}
+
+.btn-active {
+  display:block;
+}
+
+.btn-rounded {
+  border-radius: 50%;
+  width: 32px;
+  height: 64px;
+  
 }
 
