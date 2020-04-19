@@ -79,6 +79,10 @@
   box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
+.card-inactive {
+  opacity: .3;
+}
+
 .card > .card-inner {
   padding:10px;
 }
@@ -103,7 +107,6 @@
   background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
 }
 
-
 .category {
   display: none;
 }
@@ -115,8 +118,6 @@
 
 .card-cover {
   height: -webkit-fill-available !important;
-
-
 }
 
 .category .icon  {
@@ -124,7 +125,7 @@
 }
 
 .fa-redo {
-  color: grey;
+  color: grey !important;
 }
 
 .fa-lg {
@@ -313,7 +314,7 @@ a:hover {
   transition: all .2s ease;
 }
 .tgl-light:checked + .tgl-btn{
-  background: #fb3;
+  background: linear-gradient(40deg, #ffd86f, #fc6262);
 }
 
 .none {
@@ -337,5 +338,29 @@ a:hover {
   width: 32px;
   height: 64px;
   
+}
+
+#rating {
+  min-height: 35px;
+  /* max-width: fit-content;
+  overflow:hidden;
+  text-overflow:clip; */
+}
+.fa-star:before {
+  color:#fd7e14 !important;
+}
+
+.failure {
+  background-image: url('../images/failure.jpg');
+  background-repeat: no-repeat;
+  background-position: center 50%;
+  opacity: 0;
+}
+
+.success {
+  background-image: url('../images/success.jpg');
+  background-repeat: no-repeat;
+  background-position: center 50%;
+  opacity: 0;
 }
 
