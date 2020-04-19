@@ -342,6 +342,18 @@ function changeButton() {
   button.innerText = "";
   icon.setAttribute('id', 'repeat');
   button.append(icon);
+  buttonPressed = true;
+}
+
+function restoreButton() {
+  button.classList.remove('btn-rounded');
+  button.classList.add('btn-lg');
+  button.removeAttribute('id');
+  button.innerText = "Start game";
+  icon.removeAttribute('id');
+  // if (button.lastChild)
+  //   button.removeChild(button.lastChild);
+  buttonPressed = false;
 }
 
 let mainCads = container.querySelectorAll('.card');
@@ -355,33 +367,97 @@ function game() {
 }
 
 //flipping a card when clicking on the icon
-let icon = categoryPage.getElementsByClassName('fas')[0];
-let pageCards = categoryPage.getElementsByClassName('card');
-
+let icon = categoryPage.getElementsByClassName('fa-redo')[0];
+let cardActive = categoryPage.getElementsByClassName('card-active');
+let rating = document.getElementById('rating');
+let ignore = false;
+let gameResult = true;
+let buttonPressed = false;
 
 categoryPage.addEventListener('click', (event) => {
   if (event.target.getAttribute('id') === 'flip') {
     event.target.closest('.card').classList.add("flipped");
   }
-  else if (event.target.classList.contains('stretched-link') && gameMode !== true) {
+  else if (event.target.classList.contains('stretched-link') && !gameMode) {
     event.target.firstElementChild.play();
   }
+  else if (event.target.classList.contains('stretched-link') && gameMode && buttonPressed && !ignore) {
+    
+    if (event.target.closest('.card').innerText === currentCard.innerText) {
+      ignore = true;
+      let star = document.createElement('i');
+      star.className = "fas fa-2x fa-star";
+      rating.append(star);
+      let audio = new Audio('../audio/correct.mp3');
+      event.target.closest('.card').classList.remove('card-active');
+      event.target.closest('.card').classList.add('card-inactive');
+      audio.play();
+      randomCard();
+      setTimeout(playAudio, 1000);
+      gameResult = gameResult && true;
+    }
+    else {
+      let star = document.createElement('i');
+      star.className = "far fa-2x fa-star";
+      rating.append(star);
+      let audio = new Audio('../audio/error.mp3');
+      audio.play();
+      gameResult = gameResult && false;
+    }
+  }
+
   else if (event.target.getAttribute('id') === 'repeat') {
     currentCard.getElementsByTagName('audio')[0].play();
   }
   else if (event.target.classList.contains('btn')) {
     changeButton();
-    playAudio();
+    randomCard();
+    setTimeout(playAudio, 1000);
   }
 });
+
+function returnMain() {
+  document.body.classList.remove('failure');
+  document.body.classList.remove('success');
+}
+
+function finishGame() {
+  let failResult = rating.querySelectorAll('.far').length;
+   
+  if (gameResult === false) {
+    
+    document.body.classList.add('failure');
+    // document.body.innerText = failResult + ' errors';
+    let audio = new Audio('../audio/failure.mp3');
+    audio.play();
+    setTimeout(returnMain, 3000);
+  }
+  else {
+    document.body.classList.add('success');
+    let audio = new Audio('../audio/success.mp3');
+    audio.play();
+    setTimeout(returnMain, 3000);
+  }
+
+
+}
 
 let button = document.querySelector('.btn');
 let currentCard;
 
+function randomCard() {
+  let x = Math.floor(Math.random() * cardActive.length);
+  currentCard = cardActive[x];
+}
+
 function playAudio () {
-  let x = Math.floor(Math.random() * pageCards.length);
-  pageCards[x].getElementsByTagName('audio')[0].play();
-  currentCard = pageCards[x];
+  if (!currentCard) {
+    finishGame();
+  }
+  else {
+    currentCard.getElementsByTagName('audio')[0].play();
+  }
+  ignore = false;
 }
 //flip back a card on mouseout
 categoryPage.addEventListener('mouseout', (event) => {
@@ -406,19 +482,27 @@ container.addEventListener('click', (event) => {
       container.style.display = 'none';
       categoryPage.style.display = 'block';
       updateCards(selectedLink);
+  
     }
 });
 
 const htmlCards = categoryPage.getElementsByClassName('card');
 function updateCards(categoryName) {
-    for (let i = 0; i < htmlCards.length; i++) {
-        htmlCards[i].getElementsByTagName('img').forEach(element => {
-          element.src = '../' + cards[categoryName][i].image;
-        });
-        htmlCards[i].getElementsByTagName('h2')[0].innerText = cards[categoryName][i].word;
-        htmlCards[i].getElementsByClassName('translation')[0].innerText = cards[categoryName][i].translation;
-        htmlCards[i].getElementsByTagName('audio')[0].src = '../' + cards[categoryName][i].audioSrc;
-    }
+  while (rating.firstChild) {
+    rating.removeChild(rating.lastChild);
+  }
+
+  for (let i = 0; i < htmlCards.length; i++) {
+    htmlCards[i].classList.remove('card-inactive');
+    htmlCards[i].classList.add('card-active');
+    htmlCards[i].getElementsByTagName('img').forEach(element => {
+      element.src = '../' + cards[categoryName][i].image;
+    });
+    htmlCards[i].getElementsByTagName('h2')[0].innerText = cards[categoryName][i].word;
+    htmlCards[i].getElementsByClassName('translation')[0].innerText = cards[categoryName][i].translation;
+    htmlCards[i].getElementsByTagName('audio')[0].src = '../' + cards[categoryName][i].audioSrc;
+  }
+  restoreButton();
 };
 
 const SWITCHER = document.getElementById('display-address');
