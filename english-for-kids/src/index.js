@@ -235,8 +235,11 @@ function game() {
     htmlCards.forEach(element => {
       element.getElementsByTagName('div')[2].classList.remove('none');
       element.getElementsByTagName('img')[0].classList.remove('card-cover');
+      element.classList.remove('card-inactive');
+      
     });
     button.classList.remove('btn-active');
+    clearRaiting();
   }
 }
 
@@ -278,7 +281,7 @@ categoryPage.addEventListener('click', (event) => {
   else if ((clickedTarget === clickTargets.cardLink) && !gameMode) {
     event.target.firstElementChild.play();
   }
-  else if ((clickedTarget === 'cardLink') && gameMode && buttonPressed && !ignore) {
+  else if ((clickedTarget === clickTargets.cardLink) && gameMode && buttonPressed && !ignore) {
     
     if (clickedCard.innerText === currentCard.innerText) {
       ignore = true;
@@ -310,11 +313,13 @@ categoryPage.addEventListener('click', (event) => {
 });
 
 function returnMain() {
-  if (!gameResult)
+  if (!gameResult) {
     document.body.classList.remove('failure');
-  else
+    document.body.classList.remove('result')
+  }
+  else {
     document.body.classList.remove('success');
-
+  }
   categoryPage.style.display = 'none';
   container.style.display = 'block';
   switcher.checked = false;
@@ -386,6 +391,11 @@ container.addEventListener('click', (event) => {
     }
 });
 
+function clearRaiting() {
+  while (rating.firstChild) {
+    rating.removeChild(rating.lastChild);
+  }
+};
 function updateCards(categoryName) {
   while (rating.firstChild) {
     rating.removeChild(rating.lastChild);
