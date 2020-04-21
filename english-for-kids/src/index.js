@@ -182,16 +182,25 @@ let gameMode;
 let switcher = document.querySelector('.tgl');
 switcher.addEventListener('change', (event) => {
   gameMode = event.target.checked;
-  event.target.checked;
+  // event.target.checked;
   game();
 });
+
+let button = document.querySelector('.btn');
+let iconRepeat =  document.createElement('i');
+
+function createIconRepeat() {
+  iconRepeat.className = 'fas fa-3x fa-redo icon-repeat';
+  iconRepeat.setAttribute('data', 'repeat');
+  button.append(iconRepeat);
+}
 
 function changeButton() {
   button.classList.remove('btn-lg');
   button.classList.add('btn-rounded');
   button.setAttribute('data', 'repeat');
   button.innerText = "";
-  button.classList.add('btn-repeat');
+  createIconRepeat();
   buttonPressed = true;
 }
 
@@ -200,7 +209,7 @@ function restoreButton() {
   button.classList.add('btn-lg');
   button.removeAttribute('data', 'repeat');
   button.setAttribute('data', 'startGame')
-  button.classList.remove('btn-repeat');
+  iconRepeat.remove();
   button.innerText = "Start game";
   buttonPressed = false;
 }
@@ -232,7 +241,6 @@ function game() {
 }
 
 //flipping a card when clicking on the icon
-// let icon = categoryPage.getElementsByClassName('fa-redo')[0];
 let cardActive = categoryPage.getElementsByClassName('card-active');
 let rating = document.getElementById('rating');
 let ignore = false;
@@ -240,9 +248,24 @@ let gameResult = true;
 let buttonPressed = false;
 let currentCard;
 
+
+function createIconStarTrue() {
+  let star = document.createElement('i');
+  star.className = "fas fa-2x fa-star";
+  rating.append(star);
+}
+
+function createIconStarFalse() {
+  let star = document.createElement('i');
+  star.className = "far fa-2x fa-star";
+  rating.append(star);
+}
+
 const clickTargets = {
   flip: 'flip',
   cardLink: 'cardLink',
+  repeat: 'repeat',
+  startGame: 'startGame',
 }
 
 categoryPage.addEventListener('click', (event) => {
@@ -259,9 +282,7 @@ categoryPage.addEventListener('click', (event) => {
     
     if (clickedCard.innerText === currentCard.innerText) {
       ignore = true;
-      let star = document.createElement('i');
-      star.className = "fas fa-2x fa-star";
-      rating.append(star);
+      createIconStarTrue();
       let audio = new Audio('../audio/correct.mp3');
       clickedCard.classList.remove('card-active');
       clickedCard.classList.add('card-inactive');
@@ -271,19 +292,17 @@ categoryPage.addEventListener('click', (event) => {
       gameResult = gameResult && true;
     }
     else {
-      let star = document.createElement('i');
-      star.className = "far fa-2x fa-star";
-      rating.append(star);
+      createIconStarFalse(); 
       let audio = new Audio('../audio/error.mp3');
       audio.play();
       gameResult = gameResult && false;
     }
   }
 
-  else if (event.target.getAttribute('id') === 'repeat') {
+  else if (clickedTarget === clickTargets.repeat) {
     currentCard.getElementsByTagName('audio')[0].play();
   }
-  else if (event.target.classList.contains('btn')) {
+  else if (clickedTarget === clickTargets.startGame) {
     changeButton();
     randomCard();
     setTimeout(playAudio, 1000);
@@ -324,8 +343,6 @@ function finishGame() {
   audio.play();
   setTimeout(returnMain, 3000);
 }
-
-let button = document.querySelector('.btn');
 
 function randomCard() {
   let x = Math.floor(Math.random() * cardActive.length);

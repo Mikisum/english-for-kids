@@ -335,17 +335,23 @@ a:hover {
   border-radius: 50%;
   width: 32px;
   height: 64px;
+  z-index: 1000;
 }
 
-.btn-repeat {
+.icon-repeat {
+  position: absolute;
+  top: 20%;
+  left: 23%;
+}
+
+/* .btn-repeat {
   width: 45px;
   font-size: 0;
-  background-image: url('../images/repeat.svg');
+  background-image: url('../images/repeat.png');
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: 32px 32px,cover;
-  background-position: 50%;
-}
+} */
 
 #rating {
   min-height: 35px;
