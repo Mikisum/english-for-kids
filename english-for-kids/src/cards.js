@@ -100,6 +100,107 @@ const cards = {
       audioSrc: 'audio/swim.mp3'
     }
   ],
+  'Action (set C)' : [
+    {
+      word: 'cook',
+      translation: 'готовить',
+      image: 'images/cook.jpg',
+      audioSrc: 'audio/cook.mp3'
+    },
+    {
+      word: 'entertain',
+      translation: 'развлекать',
+      image: 'images/entertain.jpg',
+      audioSrc: 'audio/entertain.mp3'
+    },
+    {
+      word: 'water',
+      translation: 'поливать',
+      image: 'images/water.jpg',
+      audioSrc: 'audio/water.mp3'
+    },
+    {
+      word: 'eat',
+      translation: 'кушать',
+      image: 'images/eat.jpg',
+      audioSrc: 'audio/eat.mp3'
+    },
+    {
+      word: 'watch',
+      translation: 'смотреть',
+      image: 'images/watch.jpg',
+      audioSrc: 'audio/watch.mp3'
+    },
+    {
+      word: 'study',
+      translation: 'учиться',
+      image: 'images/study.jpg',
+      audioSrc: 'audio/study.mp3'
+    },
+    {
+      word: 'talk',
+      translation: 'разговаривать',
+      image: 'images/talk.jpg',
+      audioSrc: 'audio/talk.mp3'
+    },
+    {
+      word: 'sit',
+      translation: 'сидеть',
+      image: 'images/sit.jpg',
+      audioSrc: 'audio/sit.mp3'
+    }
+  ],
+
+  'Adjective' : [
+    {
+      word: 'hot',
+      translation: 'горячий',
+      image: 'images/hot.jpg',
+      audioSrc: 'audio/hot.mp3'
+    },
+    {
+      word: 'dirty',
+      translation: 'грязный',
+      image: 'images/dirty.jpg',
+      audioSrc: 'audio/dirty.mp3'
+    },
+    {
+      word: 'round',
+      translation: 'круглый',
+      image: 'images/round.jpg',
+      audioSrc: 'audio/round.mp3'
+    },
+    {
+      word: 'tasty',
+      translation: 'вкусный',
+      image: 'images/tasty.jpg',
+      audioSrc: 'audio/tasty.mp3'
+    },
+    {
+      word: 'light',
+      translation: 'легкий',
+      image: 'images/light.jpg',
+      audioSrc: 'audio/light.mp3'
+    },
+    {
+      word: 'slow',
+      translation: 'медленный',
+      image: 'images/slow.jpg',
+      audioSrc: 'audio/slow.mp3'
+    },
+    {
+      word: 'clever',
+      translation: 'умный',
+      image: 'images/clever.jpg',
+      audioSrc: 'audio/clever.mp3'
+    },
+    {
+      word: 'big',
+      translation: 'большой',
+      image: 'images/big.jpg',
+      audioSrc: 'audio/big.mp3'
+    }
+  ],
   'Animal (set A)' : [
     {
       word: 'cat',
