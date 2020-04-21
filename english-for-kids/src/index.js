@@ -91,7 +91,7 @@ class CategoryCard {
     let link = document.createElement('a');
     link.className = 'stretched-link';
     link.setAttribute('href', '#');
-    link.setAttribute('data', 'audioLink');
+    link.setAttribute('data', 'cardLink');
     this.cardFront.append(link);
 
     this.audio = document.createElement('audio');
@@ -139,9 +139,8 @@ class CategoryCard {
   }
 };
 
-
 let menuCards = [];
-let cardDeck = document.getElementById('mainPage');
+const cardDeck = document.getElementById('mainPage');
 Object.keys(cards).forEach(element => {
   let menuCard = new MenuCard(element);
   cardDeck.append(menuCard.getHtmlElement());
@@ -150,26 +149,22 @@ Object.keys(cards).forEach(element => {
 
 let categoryCards = [];
 let firstCategory = Object.keys(cards)[0];
-let category = document.getElementById('category-page');
+const category = document.getElementById('category-page');
 cards[firstCategory].forEach(element => {
   let card = new CategoryCard(element)
   category.append(card.getHtmlElement());
   categoryCards.push(card);
 });
 
-const container = document.getElementById('pageContainer');
-const categoryPage = document.getElementById('category');
+let container = document.getElementById('pageContainer');
+let categoryPage = document.getElementById('category');
+let navLinks = document.querySelectorAll('.nav-link');
 
-const MENU = document.querySelector('.nav'); 
-const navLinks = document.querySelectorAll('.nav-link');
-const menuIcon = document.querySelector('.menu');
-
-
-MENU.addEventListener('click', (event) => {
+/* sideBar click */
+document.querySelector('.nav').addEventListener('click', (event) => {
     navLinks.forEach(a => {
         a.classList.remove('active');
     })
-
     event.target.classList.add('active');
     if (event.target.classList.contains('menu')) {
         categoryPage.style.display = 'none';
@@ -187,6 +182,7 @@ let gameMode;
 let switcher = document.querySelector('.tgl');
 switcher.addEventListener('change', (event) => {
   gameMode = event.target.checked;
+  event.target.checked;
   game();
 });
 
@@ -195,7 +191,7 @@ function changeButton() {
   button.classList.add('btn-rounded');
   button.setAttribute('data', 'repeat');
   button.innerText = "";
-  button.append(icon);
+  button.classList.add('btn-repeat');
   buttonPressed = true;
 }
 
@@ -204,9 +200,8 @@ function restoreButton() {
   button.classList.add('btn-lg');
   button.removeAttribute('data', 'repeat');
   button.setAttribute('data', 'startGame')
-  icon.remove(icon);
+  button.classList.remove('btn-repeat');
   button.innerText = "Start game";
-  icon.removeAttribute('id');
   buttonPressed = false;
 }
 
@@ -237,7 +232,7 @@ function game() {
 }
 
 //flipping a card when clicking on the icon
-let icon = categoryPage.getElementsByClassName('fa-redo')[0];
+// let icon = categoryPage.getElementsByClassName('fa-redo')[0];
 let cardActive = categoryPage.getElementsByClassName('card-active');
 let rating = document.getElementById('rating');
 let ignore = false;
@@ -245,23 +240,31 @@ let gameResult = true;
 let buttonPressed = false;
 let currentCard;
 
+const clickTargets = {
+  flip: 'flip',
+  cardLink: 'cardLink',
+}
+
 categoryPage.addEventListener('click', (event) => {
-  if (event.target.getAttribute('data') === 'flip') {
-    event.target.closest('.card').classList.add("flipped");
+  let clickedTarget = event.target.getAttribute('data');
+  let clickedCard = event.target.closest('.card');
+  if (!clickedTarget) return;
+  if (clickedTarget === clickTargets.flip) {
+    clickedCard.classList.add("flipped");
   }
-  else if ((event.target.getAttribute('data') === 'audioLink') && !gameMode) {
+  else if ((clickedTarget === clickTargets.cardLink) && !gameMode) {
     event.target.firstElementChild.play();
   }
-  else if ((event.target.getAttribute('data') === 'audioLink') && gameMode && buttonPressed && !ignore) {
+  else if ((clickedTarget === 'cardLink') && gameMode && buttonPressed && !ignore) {
     
-    if (event.target.closest('.card').innerText === currentCard.innerText) {
+    if (clickedCard.innerText === currentCard.innerText) {
       ignore = true;
       let star = document.createElement('i');
       star.className = "fas fa-2x fa-star";
       rating.append(star);
       let audio = new Audio('../audio/correct.mp3');
-      event.target.closest('.card').classList.remove('card-active');
-      event.target.closest('.card').classList.add('card-inactive');
+      clickedCard.classList.remove('card-active');
+      clickedCard.classList.add('card-inactive');
       audio.play();
       randomCard();
       setTimeout(playAudio, 1000);
@@ -296,15 +299,22 @@ function returnMain() {
   categoryPage.style.display = 'none';
   container.style.display = 'block';
   switcher.checked = false;
+  gameMode = switcher.checked;
   game();
 }
-
+function fail() {
+  let failResult = rating.querySelectorAll('.far').length;
+  document.getElementById('wrapper').classList.add('hidden');
+  let errorText = document.createElement('h2');
+  errorText.classList.add('result');
+  errorText.innerText = failResult + ' errors';
+  document.body.append(errorText);
+  document.body.classList.add('failure');
+}
 function finishGame() {
-  // let failResult = rating.querySelectorAll('.far').length;
   let audio;
   if (!gameResult) {
-    document.body.classList.add('failure');
-    // document.body.innerText = failResult + ' errors';
+    fail();
     audio = new Audio('../audio/failure.mp3');
   }
   else {
@@ -313,7 +323,6 @@ function finishGame() {
   }
   audio.play();
   setTimeout(returnMain, 3000);
-
 }
 
 let button = document.querySelector('.btn');
@@ -360,36 +369,18 @@ container.addEventListener('click', (event) => {
     }
 });
 
-
 function updateCards(categoryName) {
   while (rating.firstChild) {
     rating.removeChild(rating.lastChild);
   }
-
   let index = 0;
   cards[categoryName].forEach(element => {
     categoryCards[index].update(element);
     index++;
   });
-
-  // for (let i = 0; i < htmlCards.length; i++) {
-  //   htmlCards[i].classList.remove('card-inactive');
-  //   htmlCards[i].classList.add('card-active');
-  //   htmlCards[i].getElementsByTagName('img').forEach(element => {
-  //     element.src = '../' + cards[categoryName][i].image;
-  //   });
-  //   htmlCards[i].getElementsByTagName('h2')[0].innerText = cards[categoryName][i].word;
-  //   htmlCards[i].getElementsByClassName('translation')[0].innerText = cards[categoryName][i].translation;
-  //   htmlCards[i].getElementsByTagName('audio')[0].src = '../' + cards[categoryName][i].audioSrc;
-  // }
   restoreButton();
 };
 
-// const SWITCHER = document.getElementById('display-address');
-
-// SWITCHER.addEventListener('click', (event) => {
-
-// });
 
 
 
