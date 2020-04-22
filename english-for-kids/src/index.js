@@ -8,14 +8,14 @@ class MenuCard {
     let imageName = cards[categoryName][1].image;
 
     this.cardContainer = document.createElement('div');
-    this.cardContainer.className = 'p-4 col-sm-6 col-md-4 col-lg-3';
+    // this.cardContainer.className = 'p-3';
 
     this.card = document.createElement('div');
     this.card.className = 'card';
     this.cardContainer.append(this.card);
 
     let imageContainer = document.createElement('div');
-    imageContainer.className = 'image';
+    imageContainer.className = 'image p-4';
     this.card.append(imageContainer);
 
     let image = document.createElement('img');
@@ -43,12 +43,11 @@ class MenuCard {
 
 };
 
-
 class CategoryCard {
   constructor({word, translation, image, audioSrc}) {
 
     this.cardContainer = document.createElement('div');
-    this.cardContainer.className = 'p-3';
+    // this.cardContainer.className = 'p-3';
     
     this.card = document.createElement('div');
     this.card.className = 'card card-active';
@@ -159,7 +158,12 @@ cards[firstCategory].forEach(element => {
 let container = document.getElementById('pageContainer');
 let categoryPage = document.getElementById('category');
 let navLinks = document.querySelectorAll('.nav-link');
-
+function hiddenSidebar() {
+  let sidebar = document.getElementById('sidebar');
+  let hiddenSidebar = document.getElementById('hiddenSidebar');
+  sidebar.classList.remove('show');
+  hiddenSidebar.classList.add('show');
+}
 /* sideBar click */
 document.querySelector('.nav').addEventListener('click', (event) => {
     navLinks.forEach(a => {
@@ -169,9 +173,12 @@ document.querySelector('.nav').addEventListener('click', (event) => {
     if (event.target.classList.contains('menu')) {
         categoryPage.style.display = 'none';
         container.style.display = 'block';
+        hiddenSidebar();
     } else {
         container.style.display = 'none';
         categoryPage.style.display = 'block';
+        hiddenSidebar();
+
     }
     let getNameCategory = event.target.innerText;
     updateCards(getNameCategory);
@@ -226,6 +233,7 @@ function game() {
       element.getElementsByTagName('img')[0].classList.add('card-cover');
     });
     button.classList.add('btn-active');
+    document.getElementById('nav').classList.add('page-game');
   }
   else {
     let mainCads = container.querySelectorAll('.card');
@@ -239,6 +247,7 @@ function game() {
       
     });
     button.classList.remove('btn-active');
+    document.getElementById('nav').classList.remove('page-game');
     clearRaiting();
   }
 }
@@ -274,7 +283,7 @@ const clickTargets = {
 categoryPage.addEventListener('click', (event) => {
   let clickedTarget = event.target.getAttribute('data');
   let clickedCard = event.target.closest('.card');
-  if (!clickedTarget) return;
+  if (!clickedTarget) hiddenSidebar();
   if (clickedTarget === clickTargets.flip) {
     clickedCard.classList.add("flipped");
   }
@@ -310,12 +319,15 @@ categoryPage.addEventListener('click', (event) => {
     randomCard();
     setTimeout(playAudio, 1000);
   }
+  hiddenSidebar();
 });
 
 function returnMain() {
   if (!gameResult) {
     document.body.classList.remove('failure');
-    document.body.classList.remove('result')
+    let errorText = document.body.getElementsByClassName('result')[0];
+    errorText.remove();  
+    document.getElementById('wrapper').classList.remove('hidden');
   }
   else {
     document.body.classList.remove('success');
@@ -387,8 +399,8 @@ container.addEventListener('click', (event) => {
       container.style.display = 'none';
       categoryPage.style.display = 'block';
       updateCards(selectedLink);
-  
     }
+    hiddenSidebar();
 });
 
 function clearRaiting() {
@@ -397,9 +409,7 @@ function clearRaiting() {
   }
 };
 function updateCards(categoryName) {
-  while (rating.firstChild) {
-    rating.removeChild(rating.lastChild);
-  }
+  clearRaiting();
   let index = 0;
   cards[categoryName].forEach(element => {
     categoryCards[index].update(element);
