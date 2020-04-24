@@ -101,7 +101,9 @@ document.querySelector('.nav').addEventListener('click', (event) => {
         container.style.display = 'none';
         categoryPage.style.display = 'block';
     }
+    const categoryTitle = document.getElementById('categoryTitle'); 
     const getNameCategory = event.target.innerText;
+    categoryTitle.innerText = getNameCategory;
     updateCards(getNameCategory);
     hideSidebar();
 });

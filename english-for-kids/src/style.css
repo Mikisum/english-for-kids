@@ -175,6 +175,8 @@ body {
   margin-left: -300px;
   left: -0.05%;
   transition: all .15s linear;
+  position: fixed;
+  z-index: 1050;
 }
 
 @media (max-width:768px) {
