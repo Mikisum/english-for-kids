@@ -19,14 +19,14 @@ class CategoryCard {
     this.imgFront.setAttribute('src', `../${image}`);
     imageContainerFront.append(this.imgFront);
 
-    const description = document.createElement('div');
-    description.setAttribute('id', 'description');
-    description.className = 'd-flex justify-content-end px-2';
-    this.cardFront.append(description);
+    this.description = document.createElement('div');
+    this.description.setAttribute('id', 'description');
+    this.description.className = 'd-flex justify-content-end px-2';
+    this.cardFront.append(this.description);
 
     this.textEN = document.createElement('div');
     this.textEN.className = 'card-inner';
-    description.append(this.textEN);
+    this.description.append(this.textEN);
 
     this.wordEN = document.createElement('h2');
     this.wordEN.innerText = word;
@@ -34,7 +34,7 @@ class CategoryCard {
 
     this.iconContainer = document.createElement('div');
     this.iconContainer.className = 'icon fa-2x color-light';
-    description.append(this.iconContainer);
+    this.description.append(this.iconContainer);
 
     const icon = document.createElement('i');
     icon.className = 'fas fa-redo';
@@ -77,8 +77,16 @@ class CategoryCard {
     cardTextContainer.append(this.wordRU);
   }
 
+  getHtmlDescription() {
+    return this.description;
+  }
+
   getHtmlElement() {
     return this.cardContainer;
+  }
+
+  getHtmlImage() {
+    return this.imgFront;
   }
 
   update({word, translation, image, audioSrc}) {
