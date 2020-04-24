@@ -37,7 +37,9 @@ const categoryPage = document.getElementById('category');
 const navLinks = document.querySelectorAll('.nav-link');
 function hideSidebar() {
   const sidebar = document.getElementById('sidebar');
+  const hidenSidebar = document.getElementById('hiddenSidebar');
   sidebar.classList.remove('show');
+  hidenSidebar.classList.remove('show');
 }
 
 const rating = document.getElementById('rating');
@@ -88,6 +90,7 @@ function updateCards(categoryName) {
 document.querySelector('.nav').addEventListener('click', (event) => {
     navLinks.forEach(a => {
         a.classList.remove('active');
+        hideSidebar();
     })
     event.target.classList.add('active');
     if (event.target.classList.contains('menu')) {
@@ -97,11 +100,10 @@ document.querySelector('.nav').addEventListener('click', (event) => {
     } else {
         container.style.display = 'none';
         categoryPage.style.display = 'block';
-        hideSidebar();
-
     }
     const getNameCategory = event.target.innerText;
     updateCards(getNameCategory);
+    hideSidebar();
 });
 let gameMode;
 function checkGameMode() {
