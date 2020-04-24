@@ -1,6 +1,4 @@
-
-
-class CardMenu {
+class MenuCard {
   constructor(categoryName, imageName) {
     this.cardContainer = document.createElement('div');
     this.card = document.createElement('div');
@@ -35,4 +33,4 @@ class CardMenu {
   }
 }
 
-export default CardMenu;
+export default MenuCard;
