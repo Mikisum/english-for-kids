@@ -27,7 +27,7 @@ function hiddenSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.remove('show');
 }
-/* sideBar click */
+// sideBar click 
 document.querySelector('.nav').addEventListener('click', (event) => {
     navLinks.forEach(a => {
         a.classList.remove('active');
@@ -52,7 +52,6 @@ let gameMode;
 const switcher = document.querySelector('.tgl');
 switcher.addEventListener('change', (event) => {
   gameMode = event.target.checked;
-  // event.target.checked;
   game();
 });
 
