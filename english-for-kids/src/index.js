@@ -86,6 +86,7 @@ function updateCards(categoryName) {
   });
   restoreButton();
 };
+const categoryTitle = document.getElementById('categoryTitle'); 
 // sideBar click 
 document.querySelector('.nav').addEventListener('click', (event) => {
     navLinks.forEach(a => {
@@ -101,7 +102,6 @@ document.querySelector('.nav').addEventListener('click', (event) => {
         container.style.display = 'none';
         categoryPage.style.display = 'block';
     }
-    const categoryTitle = document.getElementById('categoryTitle'); 
     const getNameCategory = event.target.innerText;
     categoryTitle.innerText = getNameCategory;
     updateCards(getNameCategory);
@@ -275,6 +275,8 @@ container.addEventListener('click', (event) => {
       })
       container.style.display = 'none';
       categoryPage.style.display = 'block';
+      const getNameCategory = event.target.innerText;
+      categoryTitle.innerText = getNameCategory;
       updateCards(selectedLink);
     }
     hideSidebar();
