@@ -23,7 +23,7 @@ cards[firstCategory].forEach(element => {
 const container = document.getElementById('pageContainer');
 const categoryPage = document.getElementById('category');
 const navLinks = document.querySelectorAll('.nav-link');
-function hiddenSidebar() {
+function hideSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.remove('show');
 }
@@ -36,11 +36,11 @@ document.querySelector('.nav').addEventListener('click', (event) => {
     if (event.target.classList.contains('menu')) {
         categoryPage.style.display = 'none';
         container.style.display = 'block';
-        hiddenSidebar();
+        hideSidebar();
     } else {
         container.style.display = 'none';
         categoryPage.style.display = 'block';
-        hiddenSidebar();
+        hideSidebar();
 
     }
     const getNameCategory = event.target.innerText;
@@ -146,7 +146,7 @@ categoryPage.addEventListener('click', (event) => {
   const clickedTarget = event.target.getAttribute('data');
   const clickedCard = event.target.closest('.card');
   if (!clickedTarget) {
-    hiddenSidebar();
+    hideSidebar();
   }
   if (clickedTarget === clickTargets.flip) {
     clickedCard.classList.add("flipped");
@@ -183,7 +183,7 @@ categoryPage.addEventListener('click', (event) => {
     randomCard();
     setTimeout(playAudio, 1000);
   }
-  hiddenSidebar();
+  hideSidebar();
 });
 
 function returnMain() {
@@ -264,7 +264,7 @@ container.addEventListener('click', (event) => {
       categoryPage.style.display = 'block';
       updateCards(selectedLink);
     }
-    hiddenSidebar();
+    hideSidebar();
 });
 
 function clearRaiting() {
